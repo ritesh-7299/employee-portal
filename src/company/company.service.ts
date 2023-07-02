@@ -50,6 +50,7 @@ export class CompanyService {
         token: token,
       });
     } catch (error) {
+      console.log(error);
       return res.json({
         status: false,
         message: 'Something went wrong!',

@@ -1,0 +1,3 @@
+DB_URL="mongodb://localhost:27017/empoyee_portal_dummmy"
+SECRET="secret"
+EXPIRE="7d"

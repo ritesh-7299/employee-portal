@@ -6,14 +6,14 @@ export type CompanyDocument = Company & Document;
 
 @Schema({ timestamps: true })
 export class Company {
-  @Prop()
+  @Prop({ required: true })
   readonly name: string;
 
-  @Prop({ unique: [true, 'Duplicate email entered'] })
+  @Prop({ unique: true, required: true })
   readonly email: string;
 
   @Exclude()
-  @Prop()
+  @Prop({ required: true })
   password: string;
 
   constructor(partial: Partial<CompanyDocument>) {
