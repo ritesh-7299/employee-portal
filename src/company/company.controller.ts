@@ -16,6 +16,7 @@ import { UpdateCompanyDto } from './dto/update-company.dto';
 import { Response } from 'express';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { CompanyLoginDto } from './dto/login-company.dto';
+import { combineAll } from 'rxjs';
 
 @Controller('company')
 export class CompanyController {

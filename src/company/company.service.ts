@@ -40,7 +40,7 @@ export class CompanyService {
         password: hashedPassword,
       });
 
-      const token = await this.jwtService.sign({
+      const token = this.jwtService.sign({
         id: companyData._id,
         role: 'company',
       });
@@ -64,20 +64,20 @@ export class CompanyService {
       let data = undefined;
 
       if (role === Role.COMPANY) {
-        data = await this.companyModel
-          .find({ email: email }, { _id: 1, email: 1, password: 1 })
-          .lean();
+        data = await this.companyModel.findOne(
+          { email: email },
+          { _id: 1, password: 1 },
+        );
       }
 
-      if (!data || !data.length) {
+      if (!data) {
         return res.json({
           status: false,
           message: 'Incorrect email',
         });
       }
-      console.log(data);
-      console.log('passs', password);
-      const isPassMatch = bcrypt.compare(password, data.password);
+
+      const isPassMatch = await bcrypt.compare(password, data.password);
 
       if (!isPassMatch) {
         return res.json({
