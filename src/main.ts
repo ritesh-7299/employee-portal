@@ -8,6 +8,6 @@ async function bootstrap() {
   //For enabling validation errors globally
   app.useGlobalPipes(new ValidationPipe());
 
-  await app.listen(3001).then(() => console.log('Server is started on 3001'));
+  await app.listen(8000).then(() => console.log('Server is started on 8000'));
 }
 bootstrap();
