@@ -6,6 +6,7 @@ import { CompanyModule } from './company/company.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { JwtModule } from '@nestjs/jwt';
+import { EmployeeModule } from './employee/employee.module';
 
 @Module({
   imports: [
@@ -13,10 +14,10 @@ import { JwtModule } from '@nestjs/jwt';
       envFilePath: '.env',
       isGlobal: true,
     }),
-
     MongooseModule.forRoot(process.env.DB_URL),
     AuthModule,
     CompanyModule,
+    EmployeeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
