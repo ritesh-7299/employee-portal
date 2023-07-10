@@ -43,6 +43,11 @@ export class CompanyController {
     return this.companyService.findAll(req, res);
   }
 
+  @Get('user/list')
+  async userCompanyList(@Res() res: Response) {
+    return await this.companyService.userCompanyList(res);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.companyService.findOne(+id);

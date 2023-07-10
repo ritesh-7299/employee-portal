@@ -3,9 +3,19 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Company, CompanySchema } from 'src/company/entities/company.entity';
+import {
+  Employee,
+  EmployeeSchema,
+} from 'src/employee/entities/employee.entity';
 
 @Module({
   imports: [
+    MongooseModule.forFeature([
+      { name: Company.name, schema: CompanySchema },
+      { name: Employee.name, schema: EmployeeSchema },
+    ]),
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {

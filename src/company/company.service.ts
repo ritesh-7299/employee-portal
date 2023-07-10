@@ -111,6 +111,29 @@ export class CompanyService {
     });
   }
 
+  async userCompanyList(res: any) {
+    try {
+      const data = await this.companyModel.find({}, { name: 1 }).lean();
+
+      if (!data) {
+        return res.json({
+          status: false,
+          message: 'Data not found',
+        });
+      }
+
+      return res.json({
+        status: true,
+        data: data,
+      });
+    } catch (error) {
+      return res.json({
+        status: false,
+        message: 'Something went wrong.',
+      });
+    }
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} company`;
   }
