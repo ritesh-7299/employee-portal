@@ -9,6 +9,8 @@ import {
   Employee,
   EmployeeSchema,
 } from 'src/employee/entities/employee.entity';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './guards/roles.guard';
 
 @Module({
   imports: [
@@ -29,7 +31,13 @@ import {
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+    AuthService,
+  ],
   exports: [JwtModule],
 })
 export class AuthModule {}

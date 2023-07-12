@@ -2,25 +2,26 @@ import React, { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import CopyRight from '../components/CopyRight';
-import { FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
+import { FormHelperText, MenuItem, Select } from '@mui/material';
 import axios from 'axios';
-import e from 'express';
+import { Link } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 
 export default function SignUp() {
   const [type, setType] = useState('employee');
   const [companyList, setCompanyList] = useState([]);
-  const [companyForm, setCompanyForm] = useState({
+  const initialCompanyForm = {
     name: '',
     email: '',
     password: '',
-  });
+  };
+  const [companyForm, setCompanyForm] = useState(initialCompanyForm);
 
   const [employeeForm, setEmployeeForm] = useState({
     name: '',
@@ -30,16 +31,14 @@ export default function SignUp() {
   });
 
   const getCompanyList = async () => {
-    if (companyList.length < 1) {
-      await axios
-        .get('http://127.0.0.1:8000/company/user/list')
-        .then((res) => {
-          setCompanyList(res.data.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    await axios
+      .get('http://127.0.0.1:8000/company/user/list')
+      .then((res) => {
+        setCompanyList(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleEmployeeChange = (e) => {
@@ -56,13 +55,35 @@ export default function SignUp() {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    let formData = type === 'employee' ? employeeForm : companyForm;
+    await axios
+      .post('http://localhost:8000/' + type + '/signup', formData)
+      .then((res) => {
+        if (res.data.status) {
+          alert('Signup Successful!');
+          getCompanyList();
+          localStorage.setItem('token', res.data.token);
+          localStorage.setItem('role', type);
+          redirect('/dashboard');
+        } else {
+          alert(res.data.message);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 400) {
+          alert(err.response.data.message[0]);
+        } else {
+          alert('Something Went Wrong!');
+        }
+      });
   };
 
   useEffect(() => {
     getCompanyList();
-  }, [companyList]);
+  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -179,7 +200,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
@@ -213,7 +234,7 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   name="email"
-                  value={companyForm.name}
+                  value={companyForm.email}
                   onChange={handleCompanyChange}
                 />
               </Grid>
@@ -226,7 +247,7 @@ export default function SignUp() {
                   label="Password"
                   type="password"
                   id="password"
-                  value={companyForm.name}
+                  value={companyForm.password}
                   onChange={handleCompanyChange}
                 />
               </Grid>
@@ -241,7 +262,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

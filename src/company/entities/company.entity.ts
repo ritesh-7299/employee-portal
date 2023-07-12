@@ -12,13 +12,8 @@ export class Company {
   @Prop({ unique: true, required: true })
   readonly email: string;
 
-  @Exclude()
   @Prop({ required: true })
   password: string;
-
-  constructor(partial: Partial<CompanyDocument>) {
-    Object.assign(this, partial);
-  }
 }
 
 export const CompanySchema = SchemaFactory.createForClass(Company);

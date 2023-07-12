@@ -19,6 +19,9 @@ export class Employee {
 
   @Prop({ required: false, default: false })
   isVerified: boolean;
+
+  @Prop({ required: false, default: false })
+  isDeleted: boolean;
 }
 
 export const EmployeeSchema = SchemaFactory.createForClass(Employee);
