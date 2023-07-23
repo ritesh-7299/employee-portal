@@ -6,18 +6,20 @@ import { Provider } from 'react-redux';
 import store from './store';
 import axios from 'axios';
 
-const token = localStorage.getItem('token');
-
-//set auth token to every request
-axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
+let token = localStorage.getItem('token');
+
+axios.defaults.headers.common = {
+  Authorization: `Bearer ${token ? token : ''}`,
+};
+
 root.render(
-  // <React.StrictMode>
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  // </React.StrictMode>,
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+    ,
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

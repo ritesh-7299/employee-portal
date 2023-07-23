@@ -13,13 +13,9 @@ import {
 } from '@nestjs/common';
 import { CompanyService } from './company.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
-import { UpdateCompanyDto } from './dto/update-company.dto';
 import { Response } from 'express';
-import { AuthGuard } from 'src/auth/guards/auth.guard';
-import { CompanyLoginDto } from './dto/login-company.dto';
 import { Role } from 'src/auth/guards/roles';
 import { Roles } from 'src/auth/guards/roles.decorator';
-import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('company')
 export class CompanyController {
@@ -43,16 +39,9 @@ export class CompanyController {
 
   //Api to list recent employee for a company
   @Roles(Role.COMPANY)
-  @Get('recent-employees/list')
-  async getRecentEmployees(@Res() res: Response) {
-    return await this.companyService.getRecentEmployees(res);
-  }
-
-  //Api to get total employee for a company
-  @Roles(Role.COMPANY)
-  @Get('total-employees/list')
-  async getTotalEmployees(@Res() res: Response) {
-    return await this.companyService.getTotalEmployees(res);
+  @Get('dashboard')
+  async getDashboardData(@Res() res: Response) {
+    return await this.companyService.getDashboardData(res);
   }
 
   //Api to get pending employees for a company

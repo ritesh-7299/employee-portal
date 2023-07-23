@@ -10,9 +10,13 @@ import DashboardLayout from '../../../layouts/company/Dashboard.layout';
 import axios from 'axios';
 import { APP_CONFIG } from '../../../config/app';
 import Button from '@mui/material/Button';
+import { formatDate } from '../../../helpers/formatDate';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 export default function Verification() {
   const [data, setData] = useState([]);
+  const MySwal = withReactContent(Swal);
 
   async function getData() {
     await axios
@@ -28,26 +32,59 @@ export default function Verification() {
   }
 
   async function handleApprove(id) {
-    await axios
-      .put(APP_CONFIG.BACKEND_URL + 'company/approve-employee', {
-        id: id,
-        action: 'approve',
-      })
-      .then((res) => {
-        if (res.data.status) {
-          alert('Request has been approved!');
-          getData();
-        } else {
-          alert(res.data.message);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    MySwal.fire({
+      title: 'Verify this user?',
+      text: 'You can always block this user later.',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: 'No',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await axios
+          .put(APP_CONFIG.BACKEND_URL + 'company/approve-employee', {
+            id: id,
+            action: 'approve',
+          })
+          .then((res) => {
+            if (res.data.status) {
+              MySwal.fire('User verified successfully!').then(() => getData());
+            } else {
+              alert(res.data.message);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        Swal.fire('Changes are not saved', '', 'info');
+      }
+    });
   }
 
-  function handleReject() {
-    alert('Approved!');
+  async function handleReject(id) {
+    MySwal.fire({
+      title: 'Delete this user?',
+      text: 'User will be deleted permanently. You can not undone this in future.',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: 'No',
+    }).then(async () => {
+      await axios
+        .put(APP_CONFIG.BACKEND_URL + 'company/employee/delete', {
+          id: id,
+        })
+        .then((res) => {
+          if (res.data.status) {
+            MySwal.fire('User deleted successfully!');
+            getData();
+          } else {
+            alert(res.data.message);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
   }
 
   useEffect(() => {
@@ -72,7 +109,7 @@ export default function Verification() {
                 key={row._id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell>{row.createdAt}</TableCell>
+                <TableCell>{formatDate(row.createdAt)}</TableCell>
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.email}</TableCell>
                 <TableCell>{row.isVerified ? 'Yes' : 'No'}</TableCell>
@@ -88,9 +125,9 @@ export default function Verification() {
                   <Button
                     variant="outlined"
                     color="error"
-                    onClick={handleReject}
+                    onClick={() => handleReject(row._id)}
                   >
-                    Reject
+                    Delete
                   </Button>
                 </TableCell>
               </TableRow>

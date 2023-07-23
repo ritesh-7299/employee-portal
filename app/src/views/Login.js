@@ -41,7 +41,12 @@ export default function Login() {
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('role', form.role);
           dispatch(setAuthRole(form.role));
-          navigate('/' + form.role + '/dashboard');
+
+          axios.defaults.headers.common = {
+            Authorization: `Bearer ${res.data.token}`,
+          };
+
+          navigate('/' + form.role + '/dashboard', { replace: true });
         } else {
           alert(res.data.message);
         }
@@ -131,7 +136,7 @@ export default function Login() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign Up
+            Sign in
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>

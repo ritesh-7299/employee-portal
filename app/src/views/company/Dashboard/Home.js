@@ -5,8 +5,24 @@ import Chart from '../../../components/company/Chart';
 import EmployeeBox from '../../../components/company/EmployeeBox';
 import RecentEmployeeBox from '../../../components/company/RecentEmployeeBox';
 import DashboardLayout from '../../../layouts/company/Dashboard.layout';
+import { APP_CONFIG } from '../../../config/app';
+import axios from 'axios';
 
 export default function Dashboard() {
+  const [data, setData] = React.useState({});
+
+  async function getCompanyDashboardData() {
+    try {
+      const res = await axios.get(APP_CONFIG.BACKEND_URL + 'company/dashboard');
+      setData(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  React.useEffect(() => {
+    getCompanyDashboardData();
+  }, []);
+
   return (
     <DashboardLayout>
       <Grid container spacing={3}>
@@ -20,7 +36,7 @@ export default function Dashboard() {
               height: 240,
             }}
           >
-            <Chart />
+            <Chart data={data.graphData ? data.graphData : []} />
           </Paper>
         </Grid>
         {/* Recent Deposits */}
@@ -33,13 +49,19 @@ export default function Dashboard() {
               height: 240,
             }}
           >
-            <EmployeeBox />
+            <EmployeeBox
+              employeeData={data.employeeBoxData ? data.employeeBoxData : 0}
+            />
           </Paper>
         </Grid>
         {/* Recent RecentEmployeeBox */}
         <Grid item xs={12}>
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-            <RecentEmployeeBox />
+            <RecentEmployeeBox
+              employeeData={
+                data.recentEmployeeData ? data.recentEmployeeData : []
+              }
+            />
           </Paper>
         </Grid>
       </Grid>

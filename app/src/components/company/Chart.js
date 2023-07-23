@@ -12,30 +12,57 @@ import Title from './Title';
 
 // Generate Sales Data
 function createData(time, amount) {
+  // months.forEach((month) => {
+  //   return month === time ? { time, amount } : { time: month, amount: 0 };
+  // });
   return { time, amount };
 }
 
-const data = [
-  createData('Jan', 0),
-  createData('Feb', 300),
-  createData('Mar', 600),
-  createData('Apr', 800),
-  createData('May', 1500),
-  createData('Jun', 2000),
-  createData('Jul', 2400),
-  createData('Aug', 2400),
-  createData('Sep', undefined),
+let months = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
 ];
 
-export default function Chart() {
+export default function Chart({ data }) {
   const theme = useTheme();
+  let newData = {};
+  const currentDate = new Date();
+
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
+
+  data.map((item) => {
+    return (newData[item.month] = item.count);
+  });
+
+  const graphData = [];
+
+  months.forEach((month, index) => {
+    if (Object.keys(newData).includes(month)) {
+      graphData.push(createData(month, newData[month]));
+    } else {
+      currentMonth <= index
+        ? graphData.push(createData(month, undefined))
+        : graphData.push(createData(month, 0));
+    }
+  });
 
   return (
     <React.Fragment>
-      <Title>This year</Title>
+      <Title>This year: {currentYear}</Title>
       <ResponsiveContainer>
         <LineChart
-          data={data}
+          data={graphData}
           margin={{
             top: 16,
             right: 16,

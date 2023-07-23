@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
@@ -20,6 +19,7 @@ import {
   secondaryListItems,
 } from '../../components/company/ListItems';
 import CopyRight from '../../components/CopyRight';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -72,7 +72,7 @@ export default function DashboardLayout(props) {
   function logout() {
     localStorage.removeItem('role');
     localStorage.removeItem('token');
-    navigate('/login');
+    navigate('/login', { replace: true });
   }
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
@@ -108,11 +108,6 @@ export default function DashboardLayout(props) {
           >
             Employee Portal
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
           <IconButton color="inherit">
             <Button onClick={logout} variant="contained" color="error">
               Logout
