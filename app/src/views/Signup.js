@@ -34,6 +34,7 @@ export default function SignUp() {
   });
 
   const getCompanyList = async () => {
+    console.log(APP_CONFIG.BACKEND_URL)
     await axios
       .get(APP_CONFIG.BACKEND_URL + 'company/user/list')
       .then((res) => {
