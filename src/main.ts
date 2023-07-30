@@ -6,9 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   //For enabling cors
-  app.enableCors({origin:[
-    'https://employee-portal-rd.vercel.app'      
-  ]});
+  app.enableCors();
 
   //For enabling validation errors globally
   app.useGlobalPipes(new ValidationPipe());
