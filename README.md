@@ -1,9 +1,16 @@
-# Employee Portal
+<div display="flex">
+  <h1 align="center">  Employee Portal</h1>  
+</div>
 
-![logo](https://github.com/ritesh-7299/employee-portal/assets/99594669/76c398f6-a490-4804-86ab-c750bcf0a8f7)
+<p align="center">
+    <img src="https://github.com/ritesh-7299/employee-portal/assets/99594669/76c398f6-a490-4804-86ab-c750bcf0a8f7" alt="drawing" width="100" height="100" />  
+</p>
+  
+  ![image](https://github.com/ritesh-7299/employee-portal/assets/99594669/8f948be7-fcb4-4577-a1e8-5947d7228044)
 
 
 Employee Portal is a powerful web application that simplifies employee management for companies and provides a user-friendly experience for employees. With its intuitive interface and robust features, Employee Portal streamlines HR operations, enhances workforce efficiency, and fosters a productive work environment.
+
 
 ## Features
 
