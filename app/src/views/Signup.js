@@ -34,9 +34,9 @@ export default function SignUp() {
   });
 
   const getCompanyList = async () => {
-    console.log(APP_CONFIG.BACKEND_URL)
+    console.log(process.env.REACT_APP_BACKEND_URL);
     await axios
-      .get(APP_CONFIG.BACKEND_URL + 'company/user/list')
+      .get(process.env.REACT_APP_BACKEND_URL + 'company/user/list')
       .then((res) => {
         setCompanyList(res.data.data);
       })
@@ -64,7 +64,7 @@ export default function SignUp() {
 
     let formData = type === 'employee' ? employeeForm : companyForm;
     await axios
-      .post(APP_CONFIG.BACKEND_URL + type + '/signup', formData)
+      .post(process.env.REACT_APP_BACKEND_URL + type + '/signup', formData)
       .then((res) => {
         if (res.data.status) {
           alert('Signup Successful!');
@@ -76,7 +76,6 @@ export default function SignUp() {
           localStorage.setItem('role', type);
           navigate('/' + type + '/dashboard', { replace: true });
         } else {
-          
           alert(res.data.message);
         }
       })
@@ -84,7 +83,7 @@ export default function SignUp() {
         if (err.response.status === 400) {
           alert(err.response.data.message[0]);
         } else {
-          console.log("error : ",err)
+          console.log('error : ', err);
           alert('Something Went Wrong!');
         }
       });

@@ -36,7 +36,7 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios
-      .post(APP_CONFIG.BACKEND_URL + 'auth/login', form)
+      .post(process.env.REACT_APP_BACKEND_URL + 'auth/login', form)
       .then((res) => {
         if (res.data.status) {
           localStorage.setItem('token', res.data.token);

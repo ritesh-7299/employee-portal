@@ -13,7 +13,9 @@ export default function Dashboard() {
 
   async function getCompanyDashboardData() {
     try {
-      const res = await axios.get(APP_CONFIG.BACKEND_URL + 'company/dashboard');
+      const res = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + 'company/dashboard',
+      );
       setData(res.data.data);
     } catch (error) {
       console.log(error);
