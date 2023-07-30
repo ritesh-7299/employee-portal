@@ -75,6 +75,7 @@ export default function SignUp() {
           localStorage.setItem('role', type);
           navigate('/' + type + '/dashboard', { replace: true });
         } else {
+          
           alert(res.data.message);
         }
       })
@@ -82,6 +83,7 @@ export default function SignUp() {
         if (err.response.status === 400) {
           alert(err.response.data.message[0]);
         } else {
+          console.log("error : ",err)
           alert('Something Went Wrong!');
         }
       });
