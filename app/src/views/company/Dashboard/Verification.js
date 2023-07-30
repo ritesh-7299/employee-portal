@@ -20,7 +20,7 @@ export default function Verification() {
 
   async function getData() {
     await axios
-      .get(APP_CONFIG.BACKEND_URL + 'company/pending-employees/list')
+      .get(process.env.REACT_APP_BACKEND_URL + 'company/pending-employees/list')
       .then((res) => {
         if (res.data.status) {
           setData(res.data.data);
@@ -41,7 +41,7 @@ export default function Verification() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         await axios
-          .put(APP_CONFIG.BACKEND_URL + 'company/approve-employee', {
+          .put(process.env.REACT_APP_BACKEND_URL + 'company/approve-employee', {
             id: id,
             action: 'approve',
           })
@@ -70,7 +70,7 @@ export default function Verification() {
       denyButtonText: 'No',
     }).then(async () => {
       await axios
-        .put(APP_CONFIG.BACKEND_URL + 'company/employee/delete', {
+        .put(process.env.REACT_APP_BACKEND_URL + 'company/employee/delete', {
           id: id,
         })
         .then((res) => {
