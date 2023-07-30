@@ -8,7 +8,7 @@ async function bootstrap() {
   //For enabling cors
   //app.enableCors();
   app.enableCors({
-    origin: process.env.ALLOW_ORIGINS
+    origin: ["https://employee-portal-rd.vercel.app"]
   });
 
   //For enabling validation errors globally
