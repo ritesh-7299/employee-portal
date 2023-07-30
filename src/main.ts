@@ -8,8 +8,7 @@ async function bootstrap() {
   //For enabling cors
   //app.enableCors();
   app.enableCors({
-    origin: process.env.ALLOW_ORIGINS.split(';'),
-    methods: ['POST', 'PUT', 'DELETE', 'GET'],
+    origin: process.env.ALLOW_ORIGINS.split(';')
   });
 
   //For enabling validation errors globally
