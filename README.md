@@ -38,24 +38,21 @@ git clone https://github.com/your-username/employee-portal.git
 
 Install Dependencies: Navigate to the project's root directory and install the necessary dependencies for both the frontend and backend:
 ```bash
-Copy code
 cd employee-portal
 npm install
-cd frontend
+cd app
 npm install
 ```
-Configure Environment Variables: Create a .env file in the backend directory and provide the required environment variables, such as database connection details and other configuration settings.
+Configure Environment Variables: Create a .env file in the backend directory and provide the required environment variables, such as database connection details and other configuration settings. For reference check .envExample file
 
 Run the Application: Once everything is set up, you can start the application by running the following commands:
 
 ```bash
-Copy code
 # Run the backend server
-cd ../backend
-npm run start
+npm run start:dev
 
 # In a separate terminal, run the frontend
-cd ../frontend
+cd app
 npm run start
 ```
 Access the Application: Open your web browser and go to http://localhost:3000 to access the Employee Portal application.
@@ -72,3 +69,13 @@ If you encounter any issues or need assistance, you can reach out to us here.
 
 We hope you find Employee Portal valuable and contribute to making it even better! Happy managing and collaborating! 🚀🌟
 
+<!-- CONTACT -->
+## Contact
+
+<h3>Ritesh Macwan - </h3>
+<ul>
+  <li>TWITTER - https://twitter.com/ritesh_macwan7</li>
+  <li>EMAIL - riteshmacwan07@gmail.com</li>
+  <li>GITHUB - https://github.com/ritesh-7299</li>
+</ul>
+Project Link: https://github.com/ritesh-7299/my-space
