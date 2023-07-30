@@ -171,7 +171,7 @@ export default function SignUp() {
                   id="company"
                   label="Company"
                 >
-                  {companyList.map((item, key) => {
+                  {companyList?.map((item, key) => {
                     return (
                       <MenuItem key={key} value={item._id}>
                         {item.name}
