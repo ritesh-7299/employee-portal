@@ -9,11 +9,9 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import {
   mainListItems,
   secondaryListItems,
@@ -108,11 +106,9 @@ export default function DashboardLayout(props) {
           >
             Employee Portal
           </Typography>
-          <IconButton color="inherit">
-            <Button onClick={logout} variant="contained" color="error">
-              Logout
-            </Button>
-          </IconButton>
+          <Button onClick={logout} color="inherit">
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
