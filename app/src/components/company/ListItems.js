@@ -4,14 +4,12 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { Link } from 'react-router-dom';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
 export const mainListItems = (
   <React.Fragment>
@@ -48,6 +46,18 @@ export const mainListItems = (
           <GroupAddIcon />
         </ListItemIcon>
         <ListItemText primary="Verification" />
+      </ListItemButton>
+    </Link>
+
+    <Link
+      style={{ textDecoration: 'none', color: 'initial' }}
+      to={'/company/custom-form'}
+    >
+      <ListItemButton>
+        <ListItemIcon>
+          <FormatListBulletedIcon />
+        </ListItemIcon>
+        <ListItemText primary="Custom Forms" />
       </ListItemButton>
     </Link>
 

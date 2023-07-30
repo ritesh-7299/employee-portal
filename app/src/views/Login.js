@@ -14,6 +14,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { APP_CONFIG } from '../config/app';
 import { useDispatch } from 'react-redux';
 import { setAuthRole } from '../redux/authSlice';
+import logo from '../assets/logo.png';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -71,9 +72,7 @@ export default function Login() {
           alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <img height={50} src={logo} />
         <Typography component="h1" variant="h5">
           Login
         </Typography>
@@ -136,7 +135,7 @@ export default function Login() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign in
+            Sign In
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>

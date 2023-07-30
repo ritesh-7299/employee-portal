@@ -13,6 +13,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { redirect } from 'react-router-dom';
 import { APP_CONFIG } from '../config/app';
+import logo from '../assets/logo.png';
 
 export default function SignUp() {
   let navigate = useNavigate();
@@ -67,6 +68,9 @@ export default function SignUp() {
         if (res.data.status) {
           alert('Signup Successful!');
           getCompanyList();
+          axios.defaults.headers.common = {
+            Authorization: `Bearer ${res.data.token}`,
+          };
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('role', type);
           navigate('/' + type + '/dashboard', { replace: true });
@@ -97,9 +101,7 @@ export default function SignUp() {
           alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <img height={50} src={logo} />
         <Typography component="h1" variant="h5">
           Sign up as {type}
         </Typography>
