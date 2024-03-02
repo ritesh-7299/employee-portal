@@ -16,12 +16,12 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const drawerWidth = 240;
 
@@ -92,14 +92,25 @@ const Drawer = styled(MuiDrawer, {
 
 export default function AppLayout(props) {
   let navigate = useNavigate();
+  const MySwal = withReactContent(Swal);
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const logout = () => {
-    localStorage.removeItem('role');
-    localStorage.removeItem('token');
-    navigate('/login');
+    MySwal.fire({
+      title: 'Logout',
+      text: 'Want to logout from your account?',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('role');
+        localStorage.removeItem('token');
+        navigate('/login', { replace: true });
+      }
+    });
   };
 
   const handleDrawerOpen = () => {
