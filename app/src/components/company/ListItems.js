@@ -6,6 +6,7 @@ import ListSubheader from '@mui/material/ListSubheader';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
+import InventoryIcon from '@mui/icons-material/Inventory';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { Link } from 'react-router-dom';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
@@ -51,6 +52,18 @@ export const mainListItems = (
 
     <Link
       style={{ textDecoration: 'none', color: 'initial' }}
+      to={'/company/inventory'}
+    >
+      <ListItemButton>
+        <ListItemIcon>
+          <InventoryIcon />
+        </ListItemIcon>
+        <ListItemText primary="Inventory" />
+      </ListItemButton>
+    </Link>
+
+    <Link
+      style={{ textDecoration: 'none', color: 'initial' }}
       to={'/company/custom-form'}
     >
       <ListItemButton>
@@ -60,13 +73,6 @@ export const mainListItems = (
         <ListItemText primary="Custom Forms" />
       </ListItemButton>
     </Link>
-
-    <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItemButton>
   </React.Fragment>
 );
 
