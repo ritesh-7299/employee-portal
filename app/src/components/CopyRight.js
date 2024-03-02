@@ -11,10 +11,14 @@ export default function CopyRight(props) {
       {...props}
     >
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
+      <a
+        target="_blank"
+        color="inherit"
+        href="https://www.linkedin.com/in/ritesh-macwan-8a70891ba/"
+      >
+        Ritesh Macwan
+      </a>{' '}
+      {'2023'}
       {'.'}
     </Typography>
   );

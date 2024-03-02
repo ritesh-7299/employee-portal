@@ -12,6 +12,7 @@ const Verification = React.lazy(() =>
 const CustomForm = React.lazy(() =>
   import('../views/company/Dashboard/CustomForm'),
 );
+const Inventory = React.lazy(() => import('../views/company/Inventory'));
 
 export default (
   <>
@@ -19,5 +20,6 @@ export default (
     <Route path="/company/employee" Component={EmployeeTable} />
     <Route path="/company/verification" Component={Verification} />
     <Route path="/company/custom-form" Component={CustomForm} />
+    <Route path="/company/inventory" Component={Inventory} />
   </>
 );

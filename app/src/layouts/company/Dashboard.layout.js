@@ -18,6 +18,8 @@ import {
 } from '../../components/company/ListItems';
 import CopyRight from '../../components/CopyRight';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const drawerWidth = 240;
 
@@ -67,10 +69,22 @@ const Drawer = styled(MuiDrawer, {
 
 export default function DashboardLayout(props) {
   let navigate = useNavigate();
+  const MySwal = withReactContent(Swal);
+
   function logout() {
-    localStorage.removeItem('role');
-    localStorage.removeItem('token');
-    navigate('/login', { replace: true });
+    MySwal.fire({
+      title: 'Logout',
+      text: 'Want to logout from your account?',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('role');
+        localStorage.removeItem('token');
+        navigate('/login', { replace: true });
+      }
+    });
   }
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
@@ -128,7 +142,7 @@ export default function DashboardLayout(props) {
         <List component="nav">
           {mainListItems}
           <Divider sx={{ my: 1 }} />
-          {secondaryListItems}
+          {/* {secondaryListItems} */}
         </List>
       </Drawer>
       <Box
