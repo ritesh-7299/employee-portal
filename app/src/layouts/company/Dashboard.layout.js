@@ -86,8 +86,11 @@ export default function DashboardLayout(props) {
       }
     });
   }
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(
+    localStorage.getItem('drawer') == 'true' ? true : false,
+  );
   const toggleDrawer = () => {
+    localStorage.setItem('drawer', !open);
     setOpen(!open);
   };
 
@@ -142,7 +145,7 @@ export default function DashboardLayout(props) {
         <List component="nav">
           {mainListItems}
           <Divider sx={{ my: 1 }} />
-          {/* {secondaryListItems} */}
+          {secondaryListItems}
         </List>
       </Drawer>
       <Box
