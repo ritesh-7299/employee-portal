@@ -5,12 +5,14 @@ import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { Link } from 'react-router-dom';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import PaidIcon from '@mui/icons-material/Paid';
+import CategoryIcon from '@mui/icons-material/Category';
+import ApartmentIcon from '@mui/icons-material/Apartment';
 
 export const mainListItems = (
   <React.Fragment>
@@ -25,19 +27,21 @@ export const mainListItems = (
         <ListItemText primary="Dashboard" />
       </ListItemButton>
     </Link>
-
     <Link
       style={{ textDecoration: 'none', color: 'initial' }}
       to={'/company/employee'}
     >
-      <ListItemButton>
+      <ListItemButton
+        onSelect={() => {
+          alert('okay');
+        }}
+      >
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
         <ListItemText primary="Employees" />
       </ListItemButton>
     </Link>
-
     <Link
       style={{ textDecoration: 'none', color: 'initial' }}
       to={'/company/verification'}
@@ -49,19 +53,6 @@ export const mainListItems = (
         <ListItemText primary="Verification" />
       </ListItemButton>
     </Link>
-
-    <Link
-      style={{ textDecoration: 'none', color: 'initial' }}
-      to={'/company/inventory'}
-    >
-      <ListItemButton>
-        <ListItemIcon>
-          <InventoryIcon />
-        </ListItemIcon>
-        <ListItemText primary="Inventory" />
-      </ListItemButton>
-    </Link>
-
     <Link
       style={{ textDecoration: 'none', color: 'initial' }}
       to={'/company/custom-form'}
@@ -79,25 +70,51 @@ export const mainListItems = (
 export const secondaryListItems = (
   <React.Fragment>
     <ListSubheader component="div" inset>
-      Saved reports
+      Manage Inventory
     </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItemButton>
+    <Link
+      style={{ textDecoration: 'none', color: 'initial' }}
+      to={'/company/sell'}
+    >
+      <ListItemButton>
+        <ListItemIcon>
+          <PaidIcon />
+        </ListItemIcon>
+        <ListItemText primary="Sell" />
+      </ListItemButton>
+    </Link>
+    <Link
+      style={{ textDecoration: 'none', color: 'initial' }}
+      to={'/company/items'}
+    >
+      <ListItemButton>
+        <ListItemIcon>
+          <InventoryIcon />
+        </ListItemIcon>
+        <ListItemText primary="Item" />
+      </ListItemButton>
+    </Link>
+    <Link
+      style={{ textDecoration: 'none', color: 'initial' }}
+      to={'/company/category'}
+    >
+      <ListItemButton>
+        <ListItemIcon>
+          <CategoryIcon />
+        </ListItemIcon>
+        <ListItemText primary="Category" />
+      </ListItemButton>
+    </Link>
+    <Link
+      style={{ textDecoration: 'none', color: 'initial' }}
+      to={'/company/brand'}
+    >
+      <ListItemButton>
+        <ListItemIcon>
+          <ApartmentIcon />
+        </ListItemIcon>
+        <ListItemText primary="Brand" />
+      </ListItemButton>
+    </Link>
   </React.Fragment>
 );
